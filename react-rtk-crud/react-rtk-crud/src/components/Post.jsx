@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPost } from "../redux/features/PostSlice";
+import { createPost, deletePost, fetchPost } from "../redux/features/PostSlice";
 import Spinner from "./Spinner";
 
 const Post = () => {
@@ -10,6 +10,7 @@ const Post = () => {
   const dispatch = useDispatch();
   const { loading, post } = useSelector((state) => ({ ...state.post }));
 
+  //get posts handler
   const handleFetch = (e) => {
     e.preventDefault();
     if (!id) {
@@ -18,6 +19,12 @@ const Post = () => {
       dispatch(fetchPost({ id }));
       setId("");
     }
+  };
+
+  //handle delete button
+  const handleDelete = () => {
+    dispatch(deletePost({ id: post[0].id }));
+    window.alert("Post deleted !");
   };
 
   return (
@@ -70,7 +77,11 @@ const Post = () => {
                       <button href="#" className="btn btn-primary">
                         Edit
                       </button>
-                      <button href="#" className="btn btn-danger ms-4">
+                      <button
+                        onClick={handleDelete}
+                        href="#"
+                        className="btn btn-danger ms-4"
+                      >
                         Delete
                       </button>
                     </div>
