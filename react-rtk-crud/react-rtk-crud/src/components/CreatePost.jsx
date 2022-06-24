@@ -60,7 +60,6 @@ const CreatePost = () => {
             className="form-control"
             placeholder="add post description"
             id="floatingTextarea"
-            defaultValue={""}
           />
           <label htmlFor="floatingTextarea">add post description</label>
         </div>
